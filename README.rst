@@ -6,7 +6,9 @@ A simple blog for future integration to the crits and coffee website.
 .. image:: https://img.shields.io/badge/built%20with-Cookiecutter%20Django-ff69b4.svg
      :target: https://github.com/pydanny/cookiecutter-django/
      :alt: Built with Cookiecutter Django
+Built by: `Stephen Wagstaff`_
 
+.. _`Stephen Wagstaff`: https://critsandcoffee.com/
 
 :License: Apache Software License 2.0
 
@@ -51,11 +53,13 @@ Running tests with py.test
 Live reloading and Sass CSS compilation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Moved to `Live reloading and SASS compilation`_.
+Sass CSS compilation is done through a simple management command run through the Docker instance::
 
-.. _`Live reloading and SASS compilation`: http://cookiecutter-django.readthedocs.io/en/latest/live-reloading-and-sass-compilation.html
+    $ docker-compose -f local.yml run --rm django python manage.py compilescss
 
+More information can be found on `django-sass-processor on gitHub`_.
 
+.. _`django-sass-processor on gitHub`: https://github.com/jrief/django-sass-processor
 
 
 
@@ -71,7 +75,7 @@ You must set the DSN url in production.
 Deployment
 ----------
 
-The following details how to deploy this application.
+Deployed via an Ubuntu based Docker container.
 
 
 
