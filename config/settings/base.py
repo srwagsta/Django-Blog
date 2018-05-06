@@ -67,9 +67,11 @@ THIRD_PARTY_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'rest_framework',
+    'sass_processor',
 ]
 LOCAL_APPS = [
     'crits_blog.users.apps.UsersConfig',
+    'blog',
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -210,8 +212,8 @@ EMAIL_BACKEND = env('DJANGO_EMAIL_BACKEND', default='django.core.mail.backends.s
 
 # ADMIN
 # ------------------------------------------------------------------------------
-# Django Admin URL regex.
-ADMIN_URL = r'^admin/'
+# Django Admin URL. No need to use a regex as it is being referred to by ::path
+ADMIN_URL = 'admin/'
 # https://docs.djangoproject.com/en/dev/ref/settings/#admins
 ADMINS = [
     ("""Stephen Wagstaff""", 'srwagstajunk@gmail.com'),

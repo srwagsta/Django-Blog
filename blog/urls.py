@@ -8,5 +8,5 @@ urlpatterns = [
     path('', PostListView),
     path('posts/', PostListView),
     path('posts/<slug>/', PostDetailView),
-    path('posts/<slug>/comments/<slug>', CommentDetailView),
+    path('posts/<slug>/comments/<slug2>', CommentDetailView),
 ]

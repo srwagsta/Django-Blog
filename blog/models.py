@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.conf import settings
 from django.utils import timezone
 from django.urls import reverse
 from django.utils.text import slugify
@@ -9,7 +9,7 @@ import itertools
 class Post(models.Model):
     post_id = models.IntegerField(primary_key=True)
     post_title = models.CharField(max_length=75, unique=True)
-    post_author = models.ForeignKey(User, related_name='posts', on_delete=models.CASCADE)
+    post_author = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='posts', on_delete=models.CASCADE)
     post_content = models.TextField()
     publish_date = models.DateTimeField(editable=False)
     edit_date = models.DateTimeField()
@@ -38,14 +38,14 @@ class Post(models.Model):
         return super(Post, self).save(*args, **kwargs)
 
     class Meta:
-        ordering = ['publish_date', 'edit_date', 'post_author']
+        ordering = ['publish_date', 'edit_date', 'post_author__name']
 
 
 class Comment(models.Model):
     comment_id = models.IntegerField(primary_key=True)
     post = models.OneToOneField(Post, on_delete=models.CASCADE)
     comment_content = models.TextField()
-    comment_author = models.ForeignKey(User, related_name='comments', on_delete=models.CASCADE)
+    comment_author = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='comments', on_delete=models.CASCADE)
     publish_date = models.DateTimeField()
     edit_date = models.DateTimeField()
     slug = models.SlugField()
@@ -74,4 +74,4 @@ class Comment(models.Model):
         return super(Comment, self).save(*args, **kwargs)
 
     class Meta:
-        ordering = ['likes', 'publish_date', 'edit_date', 'post_author']
+        ordering = ['likes', 'publish_date', 'edit_date', 'comment_author__name']

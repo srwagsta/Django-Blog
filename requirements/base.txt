@@ -5,6 +5,7 @@ rcssmin==1.0.6  # https://github.com/ndparker/rcssmin
 argon2-cffi==18.1.0  # https://github.com/hynek/argon2_cffi
 whitenoise==3.3.1  # https://github.com/evansd/whitenoise
 redis>=2.10.5  # https://github.com/antirez/redis
+libsass>=0.14.5 # https://github.com/sass/libsass-python
 
 # Django
 # ------------------------------------------------------------------------------

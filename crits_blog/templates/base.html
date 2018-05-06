@@ -1,112 +1,306 @@
-{% load static i18n compress%}<!DOCTYPE html>
+{% load static i18n compress %}<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>{% block title %}Crits Blog{% endblock title %}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>{% block title %}Crits Blog{% endblock title %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
+  <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
     <![endif]-->
 
-    {% block css %}
-    
+  {% block css %}
     <!-- Latest compiled and minified Bootstrap 4 beta CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-    
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+          integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <!-- Your stuff: Third-party CSS libraries go here -->
     {% compress css %}
-    <!-- This file stores project-specific CSS -->
-    
-    <link href="{% static 'css/project.css' %}" rel="stylesheet">
-    
+      <!-- This file stores project-specific CSS -->
+      <link href="{% static 'css/project.css' %}" rel="stylesheet">
     {% endcompress %}
-    {% endblock %}
+  {% endblock %}
 
-  </head>
+</head>
 
-  <body>
+<body>
 
-    <div class="m-b-1">
-      <nav class="navbar navbar-expand-md navbar-light bg-light">
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <a class="navbar-brand" href="{% url 'home' %}">Crits Blog</a>
+<div class="container">
+  <header class="header">
+    <img src="/img/logo.png" alt="standard logo" class="logo">
+    <form action="/pages/INFOST440/Final_Project/pages/login.php" class="login" method="post">
+      <input type="email" class="login__input" name="email" placeholder="Email Address">
+      <input type="password" class="login__input" name="pass" placeholder="Password">
+      <button class="login__button">
+        <svg class="login__icon">
+          <use xlink:href="/img/sprite.svg#icon-key"></use>
+        </svg>
+      </button>
+    </form>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'about' %}">About</a>
-            </li>
-            {% if request.user.is_authenticated %}
-              <li class="nav-item">
-                {# URL provided by django-allauth/account/urls.py #}
-                <a class="nav-link" href="{% url 'users:detail' request.user.username  %}">{% trans "My Profile" %}</a>
-              </li>
-              <li class="nav-item">
-                {# URL provided by django-allauth/account/urls.py #}
-                <a class="nav-link" href="{% url 'account_logout' %}">{% trans "Sign Out" %}</a>
-              </li>
-            {% else %}
-              <li class="nav-item">
-                {# URL provided by django-allauth/account/urls.py #}
-                <a id="sign-up-link" class="nav-link" href="{% url 'account_signup' %}">{% trans "Sign Up" %}</a>
-              </li>
-              <li class="nav-item">
-                {# URL provided by django-allauth/account/urls.py #}
-                <a id="log-in-link" class="nav-link" href="{% url 'account_login' %}">{% trans "Sign In" %}</a>
-              </li>
-            {% endif %}
-          </ul>
+    <form action="/pages/INFOST440/Final_Project/pages/posts.php" class="search" method="get">
+      <input type="text" class="search__input" name="first_name" placeholder="Search Posts By Author's First Name">
+      <button class="search__button">
+        <svg class="search__icon">
+          <use xlink:href="/img/sprite.svg#icon-magnifying-glass"></use>
+        </svg>
+      </button>
+    </form>
+  </header>
+  <div class="content">
+    <!--            Side NavBar for the Blog Site-->
+    <nav class="sidebar">
+      <ul class="side-nav">
+        <li
+          class="side-nav__item side-nav__item--active">
+          <a href="/pages/INFOST440/Final_Project/" class="side-nav__link">
+            <svg class="side-nav__icon">
+              <use xlink:href="/img/sprite.svg#icon-home"></use>
+            </svg>
+            <span>Home</span>
+          </a>
+        </li>
+        <li
+          class="side-nav__item">
+          <a href="/pages/INFOST440/Final_Project/pages/posts.php" class="side-nav__link">
+            <svg class="side-nav__icon">
+              <use xlink:href="/img/sprite.svg#icon-chat"></use>
+            </svg>
+            <span>Posts</span>
+          </a>
+        </li>
+        <li
+          class="side-nav__item side-nav__item">
+          <a href="/pages/INFOST440/Final_Project/pages/register.php" class="side-nav__link">
+            <svg class="side-nav__icon">
+              <use xlink:href="/img/sprite.svg#icon-key"></use>
+            </svg>
+            <span>Register</span>
+          </a>
+        </li>
+      </ul>
+
+
+      <div class="legal">
+        &copy; 2017 by Stephen Wagstaff.
+      </div>
+    </nav>
+    <main class="hotel-view">
+      <section class="gallery" id="gallery">
+        <figure class="gallery__item">
+          <img src="./images/blog-home-1.jpg" alt="Photo of coffee 1" class="gallery__photo">
+        </figure>
+        <figure class="gallery__item">
+          <img src="./images/blog-home-2.jpg" alt="Photo of coffee 2" class="gallery__photo">
+        </figure>
+        <figure class="gallery__item">
+          <img src="./images/blog-home-3.jpg" alt="Photo of coffee 3" class="gallery__photo">
+        </figure>
+      </section>
+
+      <section class="overview" id="overview">
+        <h1 class="overview__heading">
+          Crits And Coffee Blog
+        </h1>
+        <div class="overview__stars">
+          <!--                        This is simply here to fill space-->
         </div>
-      </nav>
+        <div class="overview__rating">
+          <div class="overview__rating-average">5 Posts Created</div>
+          <div class="overview__rating-count">3 Comments</div>
+        </div>
+      </section>
 
+      <section class="detail" id="details">
+        <div class="description">
+          <p class="paragraph">
+            Welcome to the Crits and Coffee blog. This is just a simple blog page created as a project for INFOST 440
+            and UW Milwaukee.
+            The hope is that visitors will contribute to posts or add posts relating to coffee or code! Check out the
+            list of suggested topics below!
+            I hope you enjoy the simple look and feel of that site and I do ask that you contribute content in a
+            respectful and polite manner.
+          </p>
+          <p class="paragraph">
+            If you have an comments or concerns relating to the site please make a post about them. I'm always looking
+            for new way to improve this
+            project. If you would like to see some of my other work feel free to find me on <a
+            href="https://github.com/srwagsta" target="_blank">Github</a>.
+          </p>
+          <ul class="list">
+            <li class="list__item">Python Programming</li>
+            <li class="list__item">Django!</li>
+            <li class="list__item">TypeScript/Angular</li>
+            <li class="list__item">InfoSec</li>
+            <li class="list__item">Coffee! Anything Coffee!</li>
+            <li class="list__item">Foodie Stuffs</li>
+          </ul>
+
+          <div class="recommend">
+            <p class="recommend__count">
+              Test and 3 others have created amazing posts. </p>
+            <!--            TODO: Pull the images from the users-->
+            <div class="recommend__friends">
+              <img src="../../../img/user-3.jpg" alt="Friend 1" class="recommend__photo">
+              <img src="../../../img/user-4.jpg" alt="Friend 2" class="recommend__photo">
+              <img src="../../../img/user-5.jpg" alt="Friend 3" class="recommend__photo">
+              <img src="../../../img/user-6.jpg" alt="Friend 4" class="recommend__photo">
+            </div>
+          </div>
+        </div>
+
+        <!--TODO: Get images from user profile images-->
+        <figure class="user-reviews">
+          <figure class="review">
+            <blockquote class="review__text">
+              hdfhdfh
+            </blockquote>
+            <figcaption class="review__user">
+              <img src="../../../img/user-1.jpg" alt="User 1" class="review__photo">
+              <div class="review__user-box">
+                <p class="review__user-name">Test User</p>
+                <p class="review__user-date">2018-04-30</p>
+              </div>
+              <div class="review__rating">0</div>
+            </figcaption>
+          </figure>
+          <figure class="user-reviews">
+            <figure class="review">
+              <blockquote class="review__text">
+                hjfgjfgjfgjfgj
+              </blockquote>
+              <figcaption class="review__user">
+                <img src="../../../img/user-1.jpg" alt="User 1" class="review__photo">
+                <div class="review__user-box">
+                  <p class="review__user-name">Test User</p>
+                  <p class="review__user-date">2018-04-30</p>
+                </div>
+                <div class="review__rating">1</div>
+              </figcaption>
+            </figure>
+
+            <a href="./pages/posts.php" class="btn-inline">Show all <span>&rarr;</span></a>
+      </section>
+
+      <div class="cta">
+        <h2 class="cta__book-now">
+          Questions? Comments? Want to contribute?
+        </h2>
+        <a href="./pages/register.php" class="btn">
+          <span class="btn__visible">Register Now</span>
+          <span class="btn__invisible">Please, play nice!</span>
+        </a>
+      </div>
+    </main>
+  </div>
+
+  {#    <div class="m-b-1">#}
+  {#      <nav class="navbar navbar-expand-md navbar-light bg-light">#}
+  {#        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">#}
+  {#          <span class="navbar-toggler-icon"></span>#}
+  {#        </button>#}
+  {#        <a class="navbar-brand" href="{% url 'home' %}">Crits Blog</a>#}
+  {##}
+  {#        <div class="collapse navbar-collapse" id="navbarSupportedContent">#}
+  {#          <ul class="navbar-nav mr-auto">#}
+  {#            <li class="nav-item active">#}
+  {#              <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>#}
+  {#            </li>#}
+  {#            <li class="nav-item">#}
+  {#              <a class="nav-link" href="{% url 'about' %}">About</a>#}
+  {#            </li>#}
+  {#            {% if request.user.is_authenticated %}#}
+  {#              <li class="nav-item">#}
+  {# URL provided by django-allauth/account/urls.py #}
+  {#                <a class="nav-link" href="{% url 'users:detail' request.user.username  %}">{% trans "My Profile" %}</a>#}
+  {#              </li>#}
+  {#              <li class="nav-item">#}
+  {# URL provided by django-allauth/account/urls.py #}
+  {#                <a class="nav-link" href="{% url 'account_logout' %}">{% trans "Sign Out" %}</a>#}
+  {#              </li>#}
+  {#            {% else %}#}
+  {#              <li class="nav-item">#}
+  {# URL provided by django-allauth/account/urls.py #}
+  {#                <a id="sign-up-link" class="nav-link" href="{% url 'account_signup' %}">{% trans "Sign Up" %}</a>#}
+  {#              </li>#}
+  {#              <li class="nav-item">#}
+  {# URL provided by django-allauth/account/urls.py #}
+  {#                <a id="log-in-link" class="nav-link" href="{% url 'account_login' %}">{% trans "Sign In" %}</a>#}
+  {#              </li>#}
+  {#            {% endif %}#}
+  {#          </ul>#}
+  {#        </div>#}
+  {#      </nav>#}
+  {##}
+  {#    </div>#}
+  {##}
+  {#    <div class="container">#}
+  {##}
+  {#      {% if messages %}#}
+  {#          {% for message in messages %}#}
+  {#              <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">{{ message }}</div>#}
+  {#          {% endfor %}#}
+  {#      {% endif %}#}
+  {##}
+  {#      {% block content %}#}
+  {#        <p>Use this document as a way to quick start any new project.</p>#}
+  {#      {% endblock content %}#}
+  {##}
+  {#    </div> <!-- /container -->#}
+  {##}
+  {#    {% block modal %}{% endblock modal %}#}
+
+  <!-- Le javascript
+  ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  {% block javascript %}
+
+    <!-- Required by Bootstrap v4 beta -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+            integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
+            integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
+            crossorigin="anonymous"></script>
+
+    <!-- Your stuff: Third-party javascript libraries go here -->
+
+
+    <!-- place project specific Javascript in this file -->
+    {% compress js %}
+      <script src="{% static 'js/project.js' %}"></script>
+    {% endcompress %}
+  {% endblock javascript %}
+</body>
+<footer class="footer">
+  <div class="row" itemscope itemtype="http://schema.org/LocalBusiness">
+    <div class="col-1-of-2">
+      <p class="footer__copyright" itemprop="description">
+        Built by <a href="http://www.critsandcoffee.com" class="footer__link">Stephen Wagstaff</a>
+      </p>
     </div>
 
-    <div class="container">
+    <div class="col-1-of-2">
+      <div class="footer__navigation">
+        <ul class="footer__list">
+          <li class="footer__item"><a href="#" class="footer__link" itemprop="name">INFOST</a></li>
+          <li class="footer__item"><a href="#" class="footer__link">
+            <span itemprop="streetAddress">University Wisconsin: Milwaukee</span> |
+            <span itemprop="addressRegion">WI</span>
+          </a></li>
+          <li class="footer__item"><a href="https://www.critsandcoffee.com" class="footer__link" itemprop="url">critsandcoffee.com</a>
+          </li>
+        </ul>
+      </div>
+    </div>
 
-      {% if messages %}
-          {% for message in messages %}
-              <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">{{ message }}</div>
-          {% endfor %}
-      {% endif %}
-
-      {% block content %}
-        <p>Use this document as a way to quick start any new project.</p>
-      {% endblock content %}
-
-    </div> <!-- /container -->
-
-    {% block modal %}{% endblock modal %}
-
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    {% block javascript %}
-      
-      <!-- Required by Bootstrap v4 beta -->
-      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
-
-      <!-- Your stuff: Third-party javascript libraries go here -->
-      
-
-      <!-- place project specific Javascript in this file -->
-      {% compress js %}
-      <script src="{% static 'js/project.js' %}"></script>
-      {% endcompress %}
-
-    {% endblock javascript %}
-  </body>
+  </div>
+</footer>
 </html>
- 
+
