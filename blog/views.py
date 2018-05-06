@@ -8,6 +8,18 @@ class BlogHomeView(TemplateView):
     template_name = 'blog/blog_home.html'
 
 
+class PostCreate(CreateView):
+    model = Post
+    success_msg = "Post Published!"
+    form_class = PostForm
+    template_name = GENERIC_CRISPY_FORM_PATH
+
+    def get_context_data(self, **kwargs):
+        context = super(PostCreate, self).get_context_data(**kwargs)
+        context['page_title'] = 'Create Post'
+        return context
+
+
 class PostListView(ListView):
     model = Post
     context_object_name = 'post_list'

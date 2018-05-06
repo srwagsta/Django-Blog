@@ -1,52 +1,68 @@
 {% extends 'base.html' %}
+{% block title %}Crits Posts{% endblock %}
 {% block content %}
-{#  TODO: Put this in a for loop for each post#}
-  <div class="row__post">
-    <div class="post">
-      <figure class="post__shape">
-        {#                              TODO: Get this image for the user profile??#}
-        <img src="../../../../img/predefined-1.jpg" alt="Cute Image" class="feature__img">
-        <figcaption class="post__caption">{# TODO: Pass the publish date here, and maybe apply a filter to make it display nicely #}</figcaption>
-      </figure>
-      <div class="post__text">
-        <h3 class="heading-tertiary u-margin-bottom-small">{# TODO: Add the post title here #}</h3>
-        <p>
-          {# TODO: Add the post content here #}
-        </p>
-      </div>
+  <section class="overview" id="overview">
+    {#TODO: Only display this button is the user is logged in #}
+    <div class="overview__heading">
+      <a class="btn btn-dark" href="{% url 'blog:post_create' %}">Create A Post</a>
+    </div>
+    <div class="overview__stars">
+      <!--               This is just to fill space once again. Quick. Dirty -->
+    </div>
+  </section>
 
-      <div class="btn-group" role="group" align="center">
-        {# TODO: No need for a form, this is django! just make a button with the detail url#}
-        <form action="create_comment.php" method="get">
-          <input type="hidden" name="post_id" value="<?php print($entry['post_id']); ?>">
-          <button class="btn btn-secondary comment-btn dropdown-toggle">Comment</button>
-        </form>
-      </div>
-      {#TODO: No need for a form, this is django! just make a button with the detail url#}
-      <div class="btn-group" role="group" align="center">
-        <form action="view_post.php" method="get">
-          <input type="hidden" name="post_id" value="<?php print($entry['post_id']); ?>">
-          <button class="btn-inline">View Full Post</button>
-        </form>
-      </div>
-      {# TODO: only show this if the user is authenticated and is an admin (Maybe pass this as context)#}
-      <div class="btn-group" role="group" align="center">
-        <form action="create_post.php" method="get">
-          <input type="hidden" name="post_id" value="<?php print($entry['post_id']); ?>">
-          <button class="btn btn-secondary dropdown-toggle">Update Post</button>
-        </form>
-      </div>
-      <div class="btn-group" role="group" align="center">
-        <button id="btnGroupDrop2" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false"> Delete Post
-        </button>
-        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-          <a class="dropdown-item" href="../helper_scripts/remove_post.php?post_id=<?php print($entry['post_id']); ?>">Yes</a>
-          <a class="dropdown-item">Cancel</a>
+  <section class="post-box" id="details">
+    {% for post in post_list %}
+      <div class="row__post">
+        <div class="post">
+          <figure class="post__shape">
+            {# TODO: Get this image for the user profile??#}
+            <img src="../../../../img/predefined-1.jpg" alt="Cute Image" class="feature__img">
+            <figcaption class="post__caption">
+              {# TODO: Pass the publish date here, and maybe apply a filter to make it display nicely #}</figcaption>
+          </figure>
+          <div class="post__text">
+            <h3 class="heading-tertiary u-margin-bottom-small">{{ post.post_title }}</h3>
+            <p>
+              {{ post.post_content }}
+            </p>
+          </div>
+
+          <div class="btn-group" role="group" align="center">
+            <a class="btn btn-secondary comment-btn dropdown-toggle" href="{{ post.get_create_comment_url }}">Leave A
+              Comment</a>
+          </div>
+          <div class="btn-group" role="group" align="center">
+            <a class="btn-inline" href="{{ post.get_absolute_url }}">View Full Post</a>
+          </div>
+          # TODO: only show this if the user is authenticated and is an admin (Maybe pass this as context)#}
+          <div class="btn-group" role="group" align="center">
+            <a class="btn btn-secondary dropdown-toggle" href="{{ get_update_url }}">Update Post</a>
+          </div>
+          <div class="btn-group" role="group" align="center">
+            <button id="btnGroupDrop2" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false"> Delete Post
+            </button>
+            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+              <a class="dropdown-item" href="{{ post.get_delete_url }}">Yes</a>
+              <a class="dropdown-item">Cancel</a>
+            </div>
+          </div>
+          {#TODO: end if#}
         </div>
       </div>
-      {#TODO: end if#}
-    </div>
-  </div>
-{#  TODO: end the for loop#}
+    {% empty %}
+      <div class="row__post">
+        <div class="post">
+          <div class="post__text">
+            <h3 class="heading-tertiary u-margin-bottom-small">NO POSTS!</h3>
+            <p>
+              Sorry, this is an empty blog. Help me out and post something!!
+            </p>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </section>
+
 {% endblock %}
