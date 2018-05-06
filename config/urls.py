@@ -3,12 +3,14 @@ from django.conf.urls import include
 from django.conf.urls.static import static
 from django.urls import path
 from django.contrib import admin
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, RedirectView
 from django.views import defaults as default_views
 from blog import urls as blog_urls
 
 urlpatterns = [
-    path('', TemplateView.as_view(template_name="pages/home.html"), name="home"),
+    # TODO: Make a proper landing pag and disable the redirect
+    # path('', TemplateView.as_view(template_name="pages/home.html"), name="home"),
+    path('', RedirectView.as_view(url='/blog/', permanent=True), name='landing'),
     path('about/', TemplateView.as_view(template_name='pages/about.html'), name='about'),
 
     # Django Admin, use {% url 'admin:index' %}

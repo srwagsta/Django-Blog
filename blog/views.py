@@ -4,6 +4,10 @@ from django.urls import reverse_lazy
 from .models import Post, Comment
 
 
+class BlogHomeView(TemplateView):
+    template_name = 'blog/blog_home.html'
+
+
 class PostListView(ListView):
     model = Post
     context_object_name = 'post_list'

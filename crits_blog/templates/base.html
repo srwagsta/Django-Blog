@@ -1,4 +1,6 @@
-{% load static i18n compress %}<!DOCTYPE html>
+{% load static i18n compress %}
+{% load sass_tags %}
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -18,7 +20,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
           integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <!-- Your stuff: All sass files that need to be compiled go here -->
-    {% load sass_tags %}
     <link href="{% sass_src 'sass/project.scss' %}" rel="stylesheet" type="text/css">
     <link href="{% sass_src 'sass/main.scss' %}" rel="stylesheet" type="text/css">
   {% endblock %}
@@ -29,26 +30,26 @@
 
 <div class="container">
   <header class="header">
-{#TODO:REPLACE THIS FORM WITH A CRISPY FORM#}
-    <img src="/img/logo.png" alt="standard logo" class="logo">
-{#    <form action="/pages/INFOST440/Final_Project/pages/login.php" class="login" method="post">#}
-{#      <input type="email" class="login__input" name="email" placeholder="Email Address">#}
-{#      <input type="password" class="login__input" name="pass" placeholder="Password">#}
-{#      <button class="login__button">#}
-{#        <svg class="login__icon">#}
-{#          <use xlink:href="/img/sprite.svg#icon-key"></use>#}
-{#        </svg>#}
-{#      </button>#}
-{#    </form>#}
-{#TODO:REPLACE THIS FORM WITH A CRISPY FORM#}
-{#    <form action="/pages/INFOST440/Final_Project/pages/posts.php" class="search" method="get">#}
-{#      <input type="text" class="search__input" name="first_name" placeholder="Search Posts By Author's First Name">#}
-{#      <button class="search__button">#}
-{#        <svg class="search__icon">#}
-{#          <use xlink:href="/img/sprite.svg#icon-magnifying-glass"></use>#}
-{#        </svg>#}
-{#      </button>#}
-{#    </form>#}
+    {#TODO:REPLACE THIS FORM WITH A CRISPY FORM#}
+    <img src="{% static "images/logos/logo.png" %}" alt="standard logo" class="logo">
+    {#    <form action="/pages/INFOST440/Final_Project/pages/login.php" class="login" method="post">#}
+    {#      <input type="email" class="login__input" name="email" placeholder="Email Address">#}
+    {#      <input type="password" class="login__input" name="pass" placeholder="Password">#}
+    {#      <button class="login__button">#}
+    {#        <svg class="login__icon">#}
+    {#          <use xlink:href="/img/sprite.svg#icon-key"></use>#}
+    {#        </svg>#}
+    {#      </button>#}
+    {#    </form>#}
+    {#TODO:REPLACE THIS FORM WITH A CRISPY FORM#}
+    {#    <form action="/pages/INFOST440/Final_Project/pages/posts.php" class="search" method="get">#}
+    {#      <input type="text" class="search__input" name="first_name" placeholder="Search Posts By Author's First Name">#}
+    {#      <button class="search__button">#}
+    {#        <svg class="search__icon">#}
+    {#          <use xlink:href="/img/sprite.svg#icon-magnifying-glass"></use>#}
+    {#        </svg>#}
+    {#      </button>#}
+    {#    </form>#}
 
   </header>
   <div class="content">
@@ -57,8 +58,9 @@
       <ul class="side-nav">
         <li
           class="side-nav__item side-nav__item--active">
-          <a href="{% url 'home' %}" class="side-nav__link">
+          <a href="{% url 'landing' %}" class="side-nav__link">
             <svg class="side-nav__icon">
+              {#  TODO: come back and add the icons somehow?? #}
               <use xlink:href="/img/sprite.svg#icon-home"></use>
             </svg>
             <span>Home</span>
@@ -68,6 +70,7 @@
           class="side-nav__item">
           <a href="{% url 'blog:home' %}" class="side-nav__link">
             <svg class="side-nav__icon">
+              {#  TODO: come back and add the icons somehow?? #}
               <use xlink:href="/img/sprite.svg#icon-chat"></use>
             </svg>
             <span>Posts</span>
@@ -77,7 +80,8 @@
           class="side-nav__item side-nav__item">
           <a href="{% url 'account_signup' %}" class="side-nav__link">
             <svg class="side-nav__icon">
-              <use xlink:href="/img/sprite.svg#icon-key"></use>
+              {#  TODO: come back and add the icons somehow?? #}
+              <use xlink:href="{% static "images/icons/sprite.svg#icon-key" %}"></use>
             </svg>
             <span>Register</span>
           </a>
@@ -88,98 +92,14 @@
       </div>
     </nav>
 
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
     <main class="hotel-view">
       {% block content %}
-        <section class="gallery" id="gallery">
-          <figure class="gallery__item">
-            <img src="./images/blog-home-1.jpg" alt="Photo of coffee 1" class="gallery__photo">
-          </figure>
-          <figure class="gallery__item">
-            <img src="./images/blog-home-2.jpg" alt="Photo of coffee 2" class="gallery__photo">
-          </figure>
-          <figure class="gallery__item">
-            <img src="./images/blog-home-3.jpg" alt="Photo of coffee 3" class="gallery__photo">
-          </figure>
-        </section>
-
-        <section class="overview" id="overview">
-          <h1 class="overview__heading">
-            Crits And Coffee Blog
-          </h1>
-          <div class="overview__stars">
-            <!--                        This is simply here to fill space-->
-          </div>
-          <div class="overview__rating">
-            <div class="overview__rating-average">MAKE DJANGO GET THE POST COUNT (5 Posts Created)</div>
-            <div class="overview__rating-count">MAKE DJANGO GET THE COMMENT COUNT (3 Comments)</div>
-          </div>
-        </section>
-
-        <section class="detail" id="details">
-          <div class="description">
-            <p class="paragraph">
-              Welcome to the Crits and Coffee blog. This is just a simple blog page created as a project for INFOST 440
-              and UW Milwaukee.
-              The hope is that visitors will contribute to posts or add posts relating to coffee or code! Check out the
-              list of suggested topics below!
-              I hope you enjoy the simple look and feel of that site and I do ask that you contribute content in a
-              respectful and polite manner.
-            </p>
-            <p class="paragraph">
-              If you have an comments or concerns relating to the site please make a post about them. I'm always looking
-              for new way to improve this
-              project. If you would like to see some of my other work feel free to find me on <a
-              href="https://github.com/srwagsta" target="_blank">Github</a>.
-            </p>
-            <ul class="list">
-              <li class="list__item">Python Programming</li>
-              <li class="list__item">Django!</li>
-              <li class="list__item">TypeScript/Angular</li>
-              <li class="list__item">InfoSec</li>
-              <li class="list__item">Coffee! Anything Coffee!</li>
-              <li class="list__item">Foodie Stuffs</li>
-            </ul>
-
-            <div class="recommend">
-              <p class="recommend__count">MAKE DJANGO GET THE FIRST USER'S FIRST NAME AND THE USER COUNT (Test and 5 other users made posts) </p>
-              <!--            TODO: Pull the images from the users-->
-              <div class="recommend__friends">
-                <img src="../../../img/user-3.jpg" alt="Friend 1" class="recommend__photo">
-                <img src="../../../img/user-4.jpg" alt="Friend 2" class="recommend__photo">
-                <img src="../../../img/user-5.jpg" alt="Friend 3" class="recommend__photo">
-                <img src="../../../img/user-6.jpg" alt="Friend 4" class="recommend__photo">
-              </div>
-            </div>
-          </div>
-
-          <!--TODO: Get images from user profile images and make this a for loop that goes through the passedcontext data-->
-            <figure class="user-reviews">
-              <figure class="review">
-                <blockquote class="review__text">
-                  MAKE DJANGO ADD THE CONTENT HERE
-                </blockquote>
-                <figcaption class="review__user">
-                  <img src="../../../img/user-1.jpg" alt="User 1" class="review__photo">
-                  <div class="review__user-box">
-                    <p class="review__user-name">MAKE DJANGO ADD THE USERNAME HERE</p>
-                    <p class="review__user-date">MAKE DJANGO DO THE PUBLISH DATE HERE</p>
-                  </div>
-                  <div class="review__rating">MAKE DJANGO PUT LIKES HERE</div>
-                </figcaption>
-              </figure>
-
-              <a href="{% url 'blog:post_list' %}" class="btn-inline">Show all <span>&rarr;</span></a>
-        </section>
-
-        <div class="cta">
-          <h2 class="cta__book-now">
-            Questions? Comments? Want to contribute?
-          </h2>
-          <a href="{% url 'account_signup' %}" class="btn">
-            <span class="btn__visible">Register Now</span>
-            <span class="btn__invisible">Please, play nice!</span>
-          </a>
-        </div>
+        THIS IS THE DEFAULT CONTENT FROM THE BASE TEMPLATE. IT SHOULD BE OVERWRITTEN.
       {% endblock %}
     </main>
   </div>
