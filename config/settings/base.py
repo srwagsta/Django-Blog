@@ -67,7 +67,6 @@ THIRD_PARTY_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'rest_framework',
-    'sass_processor',
 ]
 LOCAL_APPS = [
     'crits_blog.users.apps.UsersConfig',
@@ -241,5 +240,13 @@ SOCIALACCOUNT_ADAPTER = 'crits_blog.users.adapters.SocialAccountAdapter'
 # https://django-compressor.readthedocs.io/en/latest/quickstart/#installation
 INSTALLED_APPS += ['compressor']
 STATICFILES_FINDERS += ['compressor.finders.CompressorFinder']
-# Your stuff...
+
+# django-sass-processor
 # ------------------------------------------------------------------------------
+# https://github.com/jrief/django-sass-processor
+INSTALLED_APPS += ['sass_processor']
+SASS_PROCESSOR_ENABLED = True
+
+SASS_PROCESSOR_INCLUDE_DIRS = [
+    str(APPS_DIR.path('static/sass')),
+]
