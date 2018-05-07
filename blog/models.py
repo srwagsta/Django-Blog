@@ -25,9 +25,7 @@ class Post(models.Model):
         return reverse('blog:post_update', kwargs={'slug': self.slug})
 
     def get_delete_url(self):
-        return reverse('blog:post_remove', kwargs={'slug': self.slug})
-
-    # TODO: Add get_create_comment_url
+        return reverse('blog:post_delete', kwargs={'slug': self.slug})
 
     def _get_unique_slug(self):
         unique_slug = slugify(self)
@@ -63,7 +61,13 @@ class Comment(models.Model):
         return '%s: %s: %s' % (self.comment_author, self.publish_date, self.post.post_title)
 
     def get_absolute_url(self):
-        return reverse('blog:comment_detail', kwargs={'slug': self.slug, 'slug2': self.post.slug})
+        return reverse('blog:comment_detail', kwargs={'comment_slug': self.slug, 'post_slug': self.post.slug})
+
+    def get_update_url(self):
+        return reverse('blog:comment_update', kwargs={'comment_slug': self.slug, 'post_slug': self.post.slug})
+
+    def get_delete_url(self):
+        return reverse('blog:comment_delete', kwargs={'comment_slug': self.slug, 'post_slug': self.post.slug})
 
     def _get_unique_slug(self):
         unique_slug = slugify(self)

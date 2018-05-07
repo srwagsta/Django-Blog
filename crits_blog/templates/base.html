@@ -56,8 +56,13 @@
     <!--            Side NavBar for the Blog Site-->
     <nav class="sidebar">
       <ul class="side-nav">
-        <li
-          class="side-nav__item side-nav__item--active">
+      {% url 'blog:home' as home_url %}
+        {% if home_url %}
+          <li class="side-nav__item side-nav__item--active">
+        {% else %}
+           <li class="side-nav__item side-nav__item">
+        {% endif %}
+{#          # TODO: add the active class dynamically based on {{ request.path }}#}
           <a href="{% url 'landing' %}" class="side-nav__link">
             <svg class="side-nav__icon">
               {#  TODO: come back and add the icons somehow?? #}
@@ -66,9 +71,8 @@
             <span>Home</span>
           </a>
         </li>
-        <li
-          class="side-nav__item">
-          <a href="{% url 'blog:home' %}" class="side-nav__link">
+        <li class="side-nav__item">
+          <a href="{% url 'blog:post_list' %}" class="side-nav__link">
             <svg class="side-nav__icon">
               {#  TODO: come back and add the icons somehow?? #}
               <use xlink:href="/img/sprite.svg#icon-chat"></use>

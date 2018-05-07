@@ -2,7 +2,7 @@
 {% block title %}Crits Posts{% endblock %}
 {% block content %}
   <section class="overview" id="overview">
-    {#TODO: Only display this button is the user is logged in #}
+    {#TODO: Only display this button is the user is logged in maybe use a mixin on the view. That's probably the best#}
     <div class="overview__heading">
       <a class="btn btn-dark" href="{% url 'blog:post_create' %}">Create A Post</a>
     </div>
