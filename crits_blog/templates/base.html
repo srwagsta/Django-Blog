@@ -52,44 +52,87 @@
     {#    </form>#}
 
   </header>
+  {#These are all the URL paths to compare for the active styling on the navbar#}
+  {% url 'blog:home' as home_url %}
+  {% url 'blog:post_list' as post_url %}
+  {% url 'account_signup' as account_url %}
+  {% url 'users:detail' request.user.username as user_url %}
+  {% url 'account_logout' as logout_url %}
   <div class="content">
     <!--            Side NavBar for the Blog Site-->
     <nav class="sidebar">
       <ul class="side-nav">
-      {% url 'blog:home' as home_url %}
-        {% if home_url %}
+
+        {% if  home_url == request.path %}
           <li class="side-nav__item side-nav__item--active">
-        {% else %}
-           <li class="side-nav__item side-nav__item">
+            {% else %}
+          <li class="side-nav__item side-nav__item">
         {% endif %}
-{#          # TODO: add the active class dynamically based on {{ request.path }}#}
-          <a href="{% url 'landing' %}" class="side-nav__link">
-            <svg class="side-nav__icon">
-              {#  TODO: come back and add the icons somehow?? #}
-              <use xlink:href="/img/sprite.svg#icon-home"></use>
-            </svg>
-            <span>Home</span>
-          </a>
+        <a href="{% url 'landing' %}" class="side-nav__link">
+          <svg class="side-nav__icon">
+            {#  TODO: come back and add the icons somehow?? #}
+            <use xlink:href="/img/sprite.svg#icon-home"></use>
+          </svg>
+          <span>Home</span>
+        </a>
         </li>
-        <li class="side-nav__item">
-          <a href="{% url 'blog:post_list' %}" class="side-nav__link">
-            <svg class="side-nav__icon">
-              {#  TODO: come back and add the icons somehow?? #}
-              <use xlink:href="/img/sprite.svg#icon-chat"></use>
-            </svg>
-            <span>Posts</span>
-          </a>
+
+        {% if  post_url == request.path %}
+          <li class="side-nav__item side-nav__item--active">
+            {% else %}
+          <li class="side-nav__item side-nav__item">
+        {% endif %}
+        <a href="{% url 'blog:post_list' %}" class="side-nav__link">
+          <svg class="side-nav__icon">
+            {#  TODO: come back and add the icons somehow?? #}
+            <use xlink:href="/img/sprite.svg#icon-chat"></use>
+          </svg>
+          <span>Posts</span>
+        </a>
         </li>
-        <li
-          class="side-nav__item side-nav__item">
-          <a href="{% url 'account_signup' %}" class="side-nav__link">
-            <svg class="side-nav__icon">
-              {#  TODO: come back and add the icons somehow?? #}
-              <use xlink:href="{% static "images/icons/sprite.svg#icon-key" %}"></use>
-            </svg>
-            <span>Register</span>
-          </a>
+
+        {% if not user.is_authenticated %}
+          {% if  account_url == request.path %}
+            <li class="side-nav__item side-nav__item--active">
+              {% else %}
+            <li class="side-nav__item side-nav__item">
+          {% endif %}
+        <a href="{% url 'account_signup' %}" class="side-nav__link">
+          <svg class="side-nav__icon">
+            {#  TODO: come back and add the icons somehow?? #}
+            <use xlink:href="{% static "images/icons/sprite.svg#icon-key" %}"></use>
+          </svg>
+          <span>Register</span>
+        </a>
         </li>
+
+        {% else %}
+          {% if  user_url == request.path %}
+            <li class="side-nav__item side-nav__item--active">
+              {% else %}
+            <li class="side-nav__item side-nav__item">
+          {% endif %}
+        <a href="{% url 'users:detail' request.user.username %}" class="side-nav__link">
+          <svg class="side-nav__icon">
+            <use xlink:href="/img/sprite.svg#icon-bookmark"></use>
+          </svg>
+          <span>Edit Profile</span>
+        </a>
+        </li>
+
+          {% if  logout_url == request.path %}
+            <li class="side-nav__item side-nav__item--active">
+              {% else %}
+            <li class="side-nav__item side-nav__item">
+          {% endif %}
+        <a href="{% url 'account_logout' %}" class="side-nav__link">
+          <svg class="side-nav__icon">
+            <use xlink:href="/img/sprite.svg#icon-key"></use>
+          </svg>
+          <span>Logout</span>
+        </a>
+        </li>
+        {% endif %}
       </ul>
       <div class="legal">
         &copy; 2017 by Stephen Wagstaff.
