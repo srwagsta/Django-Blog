@@ -1,75 +1,34 @@
-.login{
-  flex: 0 0 40%;
+.post-container {
+  font-size: 1.4rem;
+  padding: 4.5rem;
+  background-color: var(--color-grey-light-1);
+  border-bottom: var(--line);
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  @media only screen and (max-width: $bp-smallest) {
-    order: 1;
-    flex: 0 0 100%;
-    background-color: var(--color-grey-light-2);
-  }
-  &__input {
-    font-family: inherit;
-    font-size: inherit;
-    color: inherit;
-    background-color: var(--color-grey-light-2);
-    border: none;
-    padding: .7rem 2rem;
-    border-radius: 100px;
-    width: 90%;
-    transition: all .2s;
-    margin-right: 3.25rem;
-
-    &:focus {
-      outline: none;
-      width: 100%;
-      background-color: var(--color-grey-light-3);
-    }
-
-    &::-webkit-input-placeholder {
-      font-weight: 100;
-      color: var(--color-grey-light-4);
-    }
+  @media only screen and (max-width: $bp-medium) {
+    padding: 3rem;
   }
 
-  &__input:focus + &__button {
-    background-color: var(--color-grey-light-3);
-  }
-
-  &__button {
-    border: none;
-    margin-left: -7rem;
-    background-color: inherit;
-
-    &:focus {
-      outline: none;
-    }
-
-    &:active {
-      transform: translateY(2px);
-    }
-  }
-
-  &__icon {
-    height: 2rem;
-    width: 2rem;
-    fill: var(--color-grey-dark-3);
+  @media only screen and (max-width: $bp-small) {
+    flex-direction: column;
   }
 }
 
+// Inner row container for each post
+.row__post {
+  width: 100%;
+  margin-bottom: 2rem;
+}
 
 .post {
-  width: 75%;
-  margin: 0 auto;
-  box-shadow: 0 3rem 6rem rgba($color-black, .1);
-  background-color: rgba($color-white, .6);
-  border-radius: 3px;
-  padding: 6rem;
-  padding-left: 9rem;
-  font-size: $default-font-size;
-  transform: skewX(-12deg);
+    width: 90%;
+    margin: 0 auto;
+    box-shadow: 0 3rem 6rem rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 3px;
+    padding: 4rem;
+    padding-left: 9rem;
+    font-size: 1.6rem;
+    transform: skewX(-12deg);
 
   @include respond(tab-port) {
     width: 100%;
@@ -142,4 +101,3 @@
     filter: blur(3px) brightness(80%);
   }
 }
-

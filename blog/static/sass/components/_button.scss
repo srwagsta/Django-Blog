@@ -15,7 +15,7 @@
         border: none;
         cursor: pointer;
     }
-    
+
     &:hover {
         transform: translateY(-3px);
         box-shadow: 0 1rem 2rem rgba($color-black,.2);
@@ -25,14 +25,14 @@
             opacity: 0;
         }
     }
-    
+
     &:active,
     &:focus {
         outline: none;
         transform: translateY(-1px);
         box-shadow: 0 .5rem 1rem rgba($color-black,.2);
     }
-    
+
     &--white {
         background-color: $color-white;
         color: $color-grey-dark;
@@ -50,7 +50,12 @@
             background-color: $color-primary;
         }
     }
-    
+
+    &--comment {
+        background-color: $color-tertiary-dark;
+        color: $color-secondary-light;
+    }
+
     &::after {
         content: "";
         display: inline-block;
@@ -63,7 +68,7 @@
         z-index: -1;
         transition: all .4s;
     }
-    
+
     &--animated {
         animation: moveInBottom .5s ease-out .75s;
         animation-fill-mode: backwards;

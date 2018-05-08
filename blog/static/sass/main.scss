@@ -7,22 +7,17 @@
 @import "base/typography";
 @import "base/utilities";
 
+@import "components/base_components";
 @import "components/bg-img";
 @import "components/button";
 @import "components/card";
 @import "components/composition";
 @import "components/feature-box";
 @import "components/form";
-@import "components/popup";
-@import "components/feature";
 @import "components/list";
-@import "components/hotels_components";
+@import "components/popup";
+@import "components/posts";
 
-@import "extra/components";
-@import "extra/register";
-@import "extra/posts";
-
+@import "layout/blog_page";
 @import "layout/footer";
 @import "layout/grid";
-@import "layout/navigation";
-@import "layout/hotel_page";

@@ -65,7 +65,7 @@
     &__radio-input {
         display: none;
     }
-    
+
     &__radio-label {
         font-size: $default-font-size;
         cursor: pointer;
@@ -102,7 +102,7 @@
     &__radio-input:checked ~ &__radio-label &__radio-button::after {
         opacity: 1;
     }
-	
+
 		&__date-group {
 					width: 32%;
 					display: inline-block;
@@ -112,7 +112,7 @@
 							margin-bottom: 2rem;
 					}
 			}
-	
+
 	    &__check-group {
         width: 33%;
         display: inline-block;
@@ -122,11 +122,11 @@
             margin-bottom: 2rem;
         }
     }
-	
+
 		&__check-input {
         display: none;
     }
-    
+
     &__check-label {
         font-size: $default-font-size;
         cursor: pointer;
@@ -160,4 +160,122 @@
     &__check-input:checked ~ &__check-label &__check-button::after {
         opacity: 1;
     }
+}
+
+.section-register {
+  display: flex;
+  flex: 0 0 82%;
+  background-image: linear-gradient(to right bottom,  $color-primary-light, $color-primary-dark);
+
+  @include respond(tab-port) {
+    padding: 10rem 0;
+  }
+}
+
+.register {
+  display: flex;
+  flex: 100 0 0;
+  background-image: linear-gradient(105deg,
+          rgba($color-white, .9) 0%,
+          rgba($color-white, .9) 50%,
+          transparent 50%) ,
+  url(../img/form-bg.jpg);
+  background-size: 100%;
+  box-shadow: 0 1.5rem 4rem rgba($color-black, .2);
+
+  @include respond(tab-land) {
+    background-image: linear-gradient(105deg,
+            rgba($color-white, .9) 0%,
+            rgba($color-white, .9) 65%,
+            transparent 65%) ,
+    url(../img/form-bg.jpg);
+    background-size: cover;
+  }
+
+  @include respond(tab-port) {
+    background-image: linear-gradient(to right,
+            rgba($color-white, .9) 0%,
+            rgba($color-white, .9) 100%),
+    url(../img/form-bg.jpg);
+  }
+
+  &__row {
+    display: flex;
+    flex: 100 0 0;
+  }
+
+  &__form {
+    width: 50%;
+    padding: 6rem;
+
+    @include respond(tab-land) {
+      width: 65%;
+    }
+
+    @include respond(tab-port) {
+      width: 100%;
+    }
+  }
+}
+
+// The small login form set in the header
+.login{
+  flex: 0 0 40%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media only screen and (max-width: $bp-smallest) {
+    order: 1;
+    flex: 0 0 100%;
+    background-color: var(--color-grey-light-2);
+  }
+  &__input {
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    background-color: var(--color-grey-light-2);
+    border: none;
+    padding: .7rem 2rem;
+    border-radius: 100px;
+    width: 90%;
+    transition: all .2s;
+    margin-right: 3.25rem;
+
+    &:focus {
+      outline: none;
+      width: 100%;
+      background-color: var(--color-grey-light-3);
+    }
+
+    &::-webkit-input-placeholder {
+      font-weight: 100;
+      color: var(--color-grey-light-4);
+    }
+  }
+
+  &__input:focus + &__button {
+    background-color: var(--color-grey-light-3);
+  }
+
+  &__button {
+    border: none;
+    margin-left: -7rem;
+    background-color: inherit;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:active {
+      transform: translateY(2px);
+    }
+  }
+
+  &__icon {
+    height: 2rem;
+    width: 2rem;
+    fill: var(--color-grey-dark-3);
+  }
 }
