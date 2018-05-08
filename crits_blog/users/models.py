@@ -9,6 +9,7 @@ class User(AbstractUser):
     # First Name and Last Name do not cover name patterns
     # around the globe.
     name = models.CharField(_("Name of User"), blank=True, max_length=255)
+    avatar = models.ImageField('Profile Pic', upload_to='user_images/', default='user_images/default/no-image.jpg')
 
     def __str__(self):
         return self.username

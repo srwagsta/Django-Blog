@@ -45,6 +45,11 @@ class Post(models.Model):
 
     class Meta:
         ordering = ['publish_date', 'edit_date', 'post_author__name']
+        permissions = (
+            ("can_publish_post", "Can publish a post"),
+            ("can_edit_post", "Can edit any posts"),
+            ("can_delete_post", "Can remove any post"),
+        )
 
 
 class Comment(models.Model):
@@ -87,3 +92,8 @@ class Comment(models.Model):
 
     class Meta:
         ordering = ['likes', 'publish_date', 'edit_date', 'comment_author__name']
+        permissions = (
+            ("can_create_comment", "Can create a comment"),
+            ("can_edit_comment", "Can edit any comment"),
+            ("can_delete_comment", "Can remove any comment"),
+        )

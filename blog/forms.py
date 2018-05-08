@@ -7,7 +7,7 @@ from .models import Post, Comment
 class PostForm(ModelForm):
     class Meta:
         model = Post
-        fields = ['post_title']
+        fields = ['post_title', 'post_content']
 
     def __init__(self, *args, **kwargs):
         super(PostForm, self).__init__(*args, **kwargs)
@@ -19,4 +19,14 @@ class PostForm(ModelForm):
 
 
 class CommentForm(ModelForm):
-    pass
+    class Meta:
+        model = Comment
+        fields = ['comment_content']
+
+    def __init__(self, *args, **kwargs):
+        super(CommentForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+        self.helper.add_input(Submit('submit', 'Submit Comment'))
+
+    def clean_post_title(self):
+        return self.cleaned_data['comment_content'].strip()

@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static i18n compress %}
-{% block title %}Crits and Coffee Blog{% endblock %}
+{% block title %}{{ page_title|title }}{% endblock %}
 {% block content %}
   <section class="gallery" id="gallery">
     <figure class="gallery__item">
@@ -82,17 +82,18 @@
           <div class="review__rating">MAKE DJANGO PUT LIKES HERE</div>
         </figcaption>
       </figure>
-
-      <a href="{% url 'blog:post_list' %}" class="btn-inline">Show all <span>&rarr;</span></a>
+    </figure>
+    <a href="{% url 'blog:post_list' %}" class="btn-inline">Show all <span>&rarr;</span></a>
   </section>
-
-  <div class="cta">
-    <h2 class="cta__book-now">
-      Questions? Comments? Want to contribute?
-    </h2>
-    <a href="{% url 'account_signup' %}" class="btn">
-      <span class="btn__visible">Register Now</span>
-      <span class="btn__invisible">Please, play nice!</span>
-    </a>
-  </div>
+  {% if not user.is_authenticated %}
+    <div class="cta">
+      <h2 class="cta__book-now">
+        Questions? Comments? Want to contribute?
+      </h2>
+      <a href="{% url 'account_signup' %}" class="btn">
+        <span class="btn__visible">Register Now</span>
+        <span class="btn__invisible">Please, play nice!</span>
+      </a>
+    </div>
+  {% endif %}
 {% endblock %}
