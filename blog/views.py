@@ -3,7 +3,8 @@ from django.views.generic import (ListView, TemplateView, DetailView,
 from django.urls import reverse_lazy
 from .models import Post, Comment
 from .forms import PostForm, CommentForm
-from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
+from rules.contrib.views import PermissionRequiredMixin
 
 
 GENERIC_CRISPY_FORM_PATH = 'blog/forms/generic_crispy_form.html'
@@ -35,6 +36,10 @@ class PostCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
         context['page_title'] = 'Create Post'
         return context
 
+    def form_valid(self, form):
+        obj = form.save(commit=False)
+        obj.post_author = self.request.user
+        return super().form_valid(form)
 
 # TODO: Make sure that the user editing the post matches the author
 class PostUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
@@ -87,7 +92,6 @@ class CommentCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
         return context
 
 
-# TODO: Make sure that the user editing the comment matches the author
 class CommentUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = Comment
     permission_required = 'comment.can_edit_comment'
@@ -102,7 +106,6 @@ class CommentUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
         return context
 
 
-# TODO: Make sure the the user deleting the comment is an admin or the author
 class CommentDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Comment
     permission_required = 'comment.can_delete_comment'

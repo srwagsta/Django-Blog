@@ -7,7 +7,7 @@ import itertools
 
 
 class Post(models.Model):
-    post_id = models.IntegerField(primary_key=True)
+    post_id = models.AutoField(primary_key=True)
     post_title = models.CharField(max_length=75, unique=True)
     post_author = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='posts', on_delete=models.CASCADE)
     post_content = models.TextField()
@@ -53,7 +53,7 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
-    comment_id = models.IntegerField(primary_key=True)
+    comment_id = models.AutoField(primary_key=True)
     post = models.OneToOneField(Post, on_delete=models.CASCADE)
     comment_content = models.TextField()
     comment_author = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='comments', on_delete=models.CASCADE)
