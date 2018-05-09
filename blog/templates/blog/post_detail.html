@@ -3,7 +3,6 @@
 {% block title %}{{ post.post_title }}{% endblock %}
 {% block content %}
   <section class="overview" id="overview">
-{#  TODO: Maybe only show these if they have permissions?#}
     <div class="overview__heading">
       <div class="btn-group" role="group" align="center">
         <a class="btn btn-secondary dropdown-toggle" href="{{ post.get_update_url }}">Update Post</a>
@@ -29,16 +28,16 @@
   </section>
 
   <section class="post-box" id="details">
-    <section class="section-escape">
+    <section class="detail">
       <div class="u-center-text u-margin-bottom-big">
         <h2 class="heading-secondary">
           {{ post.post_title }}
         </h2>
       </div>
-      <div class="row">
+      <div class="row detail__content">
         <div class="col-1-of-2">
           <h3 class="heading-tertiary u-margin-bottom-small">
-            {{ post.post_author.first_name }}, {{ post.post_author.last_name }}
+            Author: {{ post.post_author.first_name }}, {{ post.post_author.last_name }}
           </h3>
           <p class="paragraph">
             {{ post.post_content }}
@@ -60,11 +59,10 @@
             <h3 class="heading-tertiary u-margin-bottom-small">
               {{ comment.comment_author.first_name }}, {{ comment.comment_author.last_name }}
             </h3>
-            <p>{{ comment.comment_content }}</p>
+            <p><a href="{{ comment.get_absolute_url }}">{{ comment.comment_content }}</a></p>
           </div>
-
           <div class="btn-group" role="group" align="center">
-            <button id="btnGroupDrop2" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+            <button id="btnGroupDrop2" type="button" class="btn-inline dropdown-toggle" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false"> Delete Comment
             </button>
             <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">

@@ -22,25 +22,26 @@
             </figcaption>
           </figure>
           <div class="post__text">
-            <h3 class="heading-tertiary u-margin-bottom-small">{{ post.post_title }}</h3>
+            <h3 class="heading-tertiary u-margin-bottom-small">
+              <a href="{{ post.get_absolute_url }}">{{ post.post_title }}</a>
+            </h3>
             <p>
               {{ post.post_content }}
             </p>
           </div>
 
           <div class="btn-group" role="group" align="center">
-            <a class="btn btn-secondary btn--comment dropdown-toggle" href="{{ post.get_create_comment_url }}">
+            <a class="btn-inline" href="{{ post.get_create_comment_url }}">
               Leave A Comment
             </a>
           </div>
+           |
           <div class="btn-group" role="group" align="center">
-            <a class="btn-inline" href="{{ post.get_absolute_url }}">View Full Post</a>
+            <a class="btn-inline" href="{{ post.get_update_url }}">Update Post</a>
           </div>
+           |
           <div class="btn-group" role="group" align="center">
-            <a class="btn btn-secondary dropdown-toggle" href="{{ post.get_update_url }}">Update Post</a>
-          </div>
-          <div class="btn-group" role="group" align="center">
-            <button id="btnGroupDrop2" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+            <button id="btnGroupDrop2" type="button" class="btn-inline dropdown-toggle" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false"> Delete Post
             </button>
             <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">

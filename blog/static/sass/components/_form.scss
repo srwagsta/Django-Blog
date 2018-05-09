@@ -179,7 +179,7 @@
           rgba($color-white, .9) 0%,
           rgba($color-white, .9) 50%,
           transparent 50%) ,
-  url(../img/form-bg.jpg);
+  url(../images/form-bg.jpg);
   background-size: 100%;
   box-shadow: 0 1.5rem 4rem rgba($color-black, .2);
 
@@ -188,7 +188,7 @@
             rgba($color-white, .9) 0%,
             rgba($color-white, .9) 65%,
             transparent 65%) ,
-    url(../img/form-bg.jpg);
+    url(../images/form-bg.jpg);
     background-size: cover;
   }
 
@@ -196,7 +196,7 @@
     background-image: linear-gradient(to right,
             rgba($color-white, .9) 0%,
             rgba($color-white, .9) 100%),
-    url(../img/form-bg.jpg);
+    url(../images/form-bg.jpg);
   }
 
   &__row {

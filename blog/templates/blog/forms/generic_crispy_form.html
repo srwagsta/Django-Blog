@@ -4,5 +4,11 @@
 {% block title %}{{ page_title|title }}{% endblock %}
 
 {% block content %}
-  {% crispy form %}
+  <section class="section-register">
+    <div class="register__row">
+      <div class="register">
+        {% crispy form %}
+      </div>
+    </div>
+  </section>
 {% endblock %}

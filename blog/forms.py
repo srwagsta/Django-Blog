@@ -12,6 +12,7 @@ class PostForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super(PostForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper(self)
+        self.helper.form_class = 'register__form'
         self.helper.add_input(Submit('submit', 'Publish Post'))
 
     def clean_post_title(self):

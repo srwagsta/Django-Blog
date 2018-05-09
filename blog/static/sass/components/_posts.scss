@@ -101,3 +101,12 @@
     filter: blur(3px) brightness(80%);
   }
 }
+
+.detail{
+    margin-bottom: 2rem;
+    border-bottom: solid, .1rem, $color-grey-dark;
+
+    &__content{
+        margin-left: 3rem;
+    }
+}

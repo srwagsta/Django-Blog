@@ -71,15 +71,14 @@
       {% for post in top_posts %}
         <figure class="review">
           <blockquote class="review__text">
-            {{ post.post_title }}
+            <a href="{{ post.get_absolute_url }}">{{ post.post_title }}</a>
           </blockquote>
           <figcaption class="review__user">
             <img src="{% get_media_prefix %}{{ post.post_author.avatar }}" alt="User 1" class="review__photo">
             <div class="review__user-box">
               <p class="review__user-name">{{ post.post_author.first_name }}, {{ post.post_author.last_name }}</p>
-              <p class="review__user-date">{{ post.publish_date|date:"d M y" }}</p>
+              <p class="review__user-date">{{ post.post_content }}</p>
             </div>
-            <div class="review__rating">{{ post.comments }}</div>
           </figcaption>
         </figure>
       {% endfor %}

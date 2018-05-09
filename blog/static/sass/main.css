@@ -1001,16 +1001,16 @@ body {
 .register {
   display: flex;
   flex: 100 0 0;
-  background-image: linear-gradient(105deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.9) 50%, transparent 50%), url(../img/form-bg.jpg);
+  background-image: linear-gradient(105deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.9) 50%, transparent 50%), url(../images/form-bg.jpg);
   background-size: 100%;
   box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.2); }
   @media only screen and (max-width: 75em) {
     .register {
-      background-image: linear-gradient(105deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.9) 65%, transparent 65%), url(../img/form-bg.jpg);
+      background-image: linear-gradient(105deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.9) 65%, transparent 65%), url(../images/form-bg.jpg);
       background-size: cover; } }
   @media only screen and (max-width: 56.25em) {
     .register {
-      background-image: linear-gradient(to right, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.9) 100%), url(../img/form-bg.jpg); } }
+      background-image: linear-gradient(to right, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.9) 100%), url(../images/form-bg.jpg); } }
   .register__row {
     display: flex;
     flex: 100 0 0; }
@@ -1244,6 +1244,12 @@ body {
   .post:hover .post__img {
     transform: translateX(-4rem) scale(1);
     filter: blur(3px) brightness(80%); }
+
+.detail {
+  margin-bottom: 2rem;
+  border-bottom: solid, 0.1rem, #777; }
+  .detail__content {
+    margin-left: 3rem; }
 
 .container {
   max-width: 120rem;
