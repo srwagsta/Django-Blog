@@ -47,34 +47,34 @@
       </div>
     </section>
 
-{#    {% for comment in post.comments %}#}
-{#      <div class="row__post">#}
-{#        <div class="post">#}
-{#          <figure class="post__shape">#}
-{#            <img src="{% get_media_prefix %}{{ comment.comment_author.avatar }}" alt="Cute Image" class="feature__img">#}
-{#            <figcaption class="post__caption">#}
-{#              {{ comment.publish_date|date:"d M y" }}#}
-{#            </figcaption>#}
-{#          </figure>#}
-{#          <div class="post__text">#}
-{#            <h3 class="heading-tertiary u-margin-bottom-small">#}
-{#              {{ comment.comment_author.first_name }}, {{ comment.comment_author.last_name }}#}
-{#            </h3>#}
-{#            <p>{{ comment.comment.content }}</p>#}
-{#          </div>#}
-{##}
-{#          <div class="btn-group" role="group" align="center">#}
-{#            <button id="btnGroupDrop2" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"#}
-{#                    aria-haspopup="true" aria-expanded="false"> Delete Comment#}
-{#            </button>#}
-{#            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">#}
-{#              <a class="dropdown-item"#}
-{#                 href="{{ comment.get_delete_url }}">Yes</a>#}
-{#              <a class="dropdown-item">Cancel</a>#}
-{#            </div>#}
-{#          </div>#}
-{#        </div>#}
-{#      </div>#}
-{#    {% endfor %}#}
+    {% for comment in post.comments.all %}
+      <div class="row__post">
+        <div class="post">
+          <figure class="post__shape">
+            <img src="{% get_media_prefix %}{{ comment.comment_author.avatar }}" alt="Cute Image" class="feature__img">
+            <figcaption class="post__caption">
+              {{ comment.publish_date|date:"d M y" }}
+            </figcaption>
+          </figure>
+          <div class="post__text">
+            <h3 class="heading-tertiary u-margin-bottom-small">
+              {{ comment.comment_author.first_name }}, {{ comment.comment_author.last_name }}
+            </h3>
+            <p>{{ comment.comment.content }}</p>
+          </div>
+
+          <div class="btn-group" role="group" align="center">
+            <button id="btnGroupDrop2" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false"> Delete Comment
+            </button>
+            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+              <a class="dropdown-item"
+                 href="{{ comment.get_delete_url }}">Yes</a>
+              <a class="dropdown-item">Cancel</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
   </section>
 {% endblock %}
