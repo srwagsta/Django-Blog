@@ -5,6 +5,7 @@ from .models import Post, Comment
 from .forms import PostForm, CommentForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from rules.contrib.views import PermissionRequiredMixin
+from django.contrib.auth import get_user_model
 
 
 GENERIC_CRISPY_FORM_PATH = 'blog/forms/generic_crispy_form.html'
@@ -17,9 +18,18 @@ class BlogHomeView(TemplateView):
     template_name = 'blog/blog_home.html'
 
     def get_context_data(self, **kwargs):
-        # TODO: Add any context data needed here (number of posts, comments, top posts, most liked .... etc
         context = super(BlogHomeView, self).get_context_data(**kwargs)
         context['page_title'] = 'Crits and Coffee Blog'
+        # Model Totals
+        context['total_post_count'] = Post.objects.count()
+        context['total_comment_count'] = Comment.objects.count()
+        context['total_user_count'] = get_user_model().objects.count()
+        # First users for the avatar pic and the first name field
+        first_4_users = get_user_model().objects.all()[:4]
+        context['first_user'] = first_4_users[0]
+        context['user_profiles'] = first_4_users
+        # 2 most recent posts to be pinned
+        context['top_posts'] = Post.objects.all().order_by('-post_id')[:2]
         return context
 
 
@@ -41,7 +51,7 @@ class PostCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
         obj.post_author = self.request.user
         return super().form_valid(form)
 
-# TODO: Make sure that the user editing the post matches the author
+
 class PostUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = Post
     permission_required = 'post.can_edit_post'
@@ -56,7 +66,6 @@ class PostUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
         return context
 
 
-# TODO: Make sure the the user deleting the post is an admin or the author
 class PostDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Post
     permission_required = 'post.can_delete_post'

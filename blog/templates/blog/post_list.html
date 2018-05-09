@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}Crits Posts{% endblock %}
 {% block content %}
   <section class="overview" id="overview">
-    {#TODO: Only display this button is the user is logged in maybe use a mixin on the view. That's probably the best#}
     <div class="overview__heading">
       <a class="btn btn-dark" href="{% url 'blog:post_create' %}">Create A Post</a>
     </div>
@@ -16,10 +16,10 @@
       <div class="row__post">
         <div class="post">
           <figure class="post__shape">
-            {# TODO: Get this image for the user profile??#}
-            <img src="../../../../img/predefined-1.jpg" alt="Cute Image" class="feature__img">
+            <img src="{% get_media_prefix %}{{ post.post_author.avatar }}" alt="Cute Image" class="feature__img">
             <figcaption class="post__caption">
-              {# TODO: Pass the publish date here, and maybe apply a filter to make it display nicely #}</figcaption>
+              {{ post.publish_date|date:"d M y" }}
+            </figcaption>
           </figure>
           <div class="post__text">
             <h3 class="heading-tertiary u-margin-bottom-small">{{ post.post_title }}</h3>
@@ -35,7 +35,6 @@
           <div class="btn-group" role="group" align="center">
             <a class="btn-inline" href="{{ post.get_absolute_url }}">View Full Post</a>
           </div>
-          # TODO: only show this if the user is authenticated and is an admin (Maybe pass this as context)#}
           <div class="btn-group" role="group" align="center">
             <a class="btn btn-secondary dropdown-toggle" href="{{ get_update_url }}">Update Post</a>
           </div>
@@ -48,7 +47,6 @@
               <a class="dropdown-item">Cancel</a>
             </div>
           </div>
-          {#TODO: end if#}
         </div>
       </div>
     {% empty %}
