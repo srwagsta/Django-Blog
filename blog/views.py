@@ -6,6 +6,7 @@ from .forms import PostForm, CommentForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from rules.contrib.views import PermissionRequiredMixin
 from django.contrib.auth import get_user_model
+from django.shortcuts import get_object_or_404
 
 
 GENERIC_CRISPY_FORM_PATH = 'blog/forms/generic_crispy_form.html'
@@ -94,6 +95,20 @@ class CommentCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     success_msg = "Comment Published!"
     form_class = CommentForm
     template_name = GENERIC_CRISPY_FORM_PATH
+
+    def get_success_url(self, **kwargs):
+        return reverse_lazy('blog:post_detail', args=(self.object.post.slug,))
+
+    def get_form(self):
+        form = super(CommentCreate, self).get_form()
+        post = get_object_or_404(Post, pk=self.kwargs['post_id'])
+        form.instance.post = post
+        return form
+
+    def form_valid(self, form):
+        obj = form.save(commit=False)
+        obj.comment_author = self.request.user
+        return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
         context = super(CommentCreate, self).get_context_data(**kwargs)

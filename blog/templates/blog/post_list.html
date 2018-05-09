@@ -29,14 +29,15 @@
           </div>
 
           <div class="btn-group" role="group" align="center">
-            <a class="btn btn-secondary btn--comment dropdown-toggle" href="{{ post.get_create_comment_url }}">Leave A
-              Comment</a>
+            <a class="btn btn-secondary btn--comment dropdown-toggle" href="{{ post.get_create_comment_url }}">
+              Leave A Comment
+            </a>
           </div>
           <div class="btn-group" role="group" align="center">
             <a class="btn-inline" href="{{ post.get_absolute_url }}">View Full Post</a>
           </div>
           <div class="btn-group" role="group" align="center">
-            <a class="btn btn-secondary dropdown-toggle" href="{{ get_update_url }}">Update Post</a>
+            <a class="btn btn-secondary dropdown-toggle" href="{{ post.get_update_url }}">Update Post</a>
           </div>
           <div class="btn-group" role="group" align="center">
             <button id="btnGroupDrop2" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"

@@ -27,6 +27,9 @@ class Post(models.Model):
     def get_delete_url(self):
         return reverse('blog:post_delete', kwargs={'slug': self.slug})
 
+    def get_create_comment_url(self):
+        return reverse('blog:comment_create', kwargs={'post_id': self.post_id})
+
     def _get_unique_slug(self):
         unique_slug = slugify(self)
         for x in itertools.count(1):
@@ -54,9 +57,11 @@ class Post(models.Model):
 
 class Comment(models.Model):
     comment_id = models.AutoField(primary_key=True)
-    post = models.OneToOneField(Post, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, related_name='comments', on_delete=models.CASCADE)
     comment_content = models.TextField()
-    comment_author = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='comments', on_delete=models.CASCADE)
+    comment_author = models.ForeignKey(settings.AUTH_USER_MODEL,
+                                       related_name='authored_comments',
+                                       on_delete=models.CASCADE)
     publish_date = models.DateTimeField()
     edit_date = models.DateTimeField()
     slug = models.SlugField()
