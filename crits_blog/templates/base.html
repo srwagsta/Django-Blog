@@ -30,27 +30,14 @@
 
 <div class="container">
   <header class="header">
-    {#TODO:REPLACE THIS FORM WITH A CRISPY FORM#}
-    <img src="{% static "images/logos/logo.png" %}" alt="standard logo" class="logo">
-    {#    <form action="/pages/INFOST440/Final_Project/pages/login.php" class="login" method="post">#}
-    {#      <input type="email" class="login__input" name="email" placeholder="Email Address">#}
-    {#      <input type="password" class="login__input" name="pass" placeholder="Password">#}
-    {#      <button class="login__button">#}
-    {#        <svg class="login__icon">#}
-    {#          <use xlink:href="/img/sprite.svg#icon-key"></use>#}
-    {#        </svg>#}
-    {#      </button>#}
-    {#    </form>#}
-    {#TODO:REPLACE THIS FORM WITH A CRISPY FORM#}
-    {#    <form action="/pages/INFOST440/Final_Project/pages/posts.php" class="search" method="get">#}
-    {#      <input type="text" class="search__input" name="first_name" placeholder="Search Posts By Author's First Name">#}
-    {#      <button class="search__button">#}
-    {#        <svg class="search__icon">#}
-    {#          <use xlink:href="/img/sprite.svg#icon-magnifying-glass"></use>#}
-    {#        </svg>#}
-    {#      </button>#}
-    {#    </form>#}
-
+    <img src="{% static "images/logos/logo.png" %}" href="{% url 'landing' %}" alt="standard logo" class="logo"/>
+    {% if not user.is_authenticated %}
+      <div class="login">
+        <div class="login__input">
+          <a href="{%  url 'account_login' %}">Sign in</a>
+        </div>
+      </div>
+    {% endif %}
   </header>
   {#These are all the URL paths to compare for the active styling on the navbar#}
   {% url 'blog:home' as home_url %}
