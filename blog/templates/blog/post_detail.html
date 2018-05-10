@@ -58,8 +58,16 @@
           <div class="post__text">
             <h3 class="heading-tertiary u-margin-bottom-small">
               {{ comment.comment_author.first_name }}, {{ comment.comment_author.last_name }}
+              {% if comment.likes > 0 %}
+                | {{ comment.likes }} Likes!
+              {% endif %}
             </h3>
             <p><a href="{{ comment.get_absolute_url }}">{{ comment.comment_content }}</a></p>
+          </div>
+          <div class="btn-group" role="group" align="center">
+            <form id="like" class="btn-inline" method="post">
+              +1 Like
+            </form>
           </div>
           <div class="btn-group" role="group" align="center">
             <button id="btnGroupDrop2" type="button" class="btn-inline dropdown-toggle" data-toggle="dropdown"

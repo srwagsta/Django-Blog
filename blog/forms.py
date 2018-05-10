@@ -27,6 +27,7 @@ class CommentForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super(CommentForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper(self)
+        self.helper.form_class = 'register__form'
         self.helper.add_input(Submit('submit', 'Submit Comment'))
 
     def clean_post_title(self):

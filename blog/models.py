@@ -68,21 +68,18 @@ class Comment(models.Model):
     likes = models.IntegerField(default=0)
 
     def __str__(self):
-        return '%s: %s: %s' % (self.comment_author, self.publish_date, self.post.post_title)
-
-    def get_absolute_url(self):
-        return reverse('blog:post_comments', kwargs={'comment_slug': self.slug, 'post_slug': self.post.slug})
+        return '%s: %s: %s' % (self.publish_date, self.post.post_title, self.comment_author)
 
     def get_update_url(self):
         return reverse('blog:comment_update', kwargs={'comment_slug': self.slug, 'post_slug': self.post.slug})
 
     def get_delete_url(self):
-        return reverse('blog:comment_delete', kwargs={'comment_slug': self.slug, 'post_slug': self.post.slug})
+        return reverse('blog:comment_delete', kwargs={'slug': self.slug, 'post_slug': self.post.slug})
 
     def _get_unique_slug(self):
         unique_slug = slugify(self)
         for x in itertools.count(1):
-            if not Post.objects.filter(slug=unique_slug).exists():
+            if not Comment.objects.filter(slug=unique_slug).exists():
                 break
             unique_slug = '%s-%d' % (unique_slug, x)
         return unique_slug

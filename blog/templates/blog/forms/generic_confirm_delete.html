@@ -3,15 +3,25 @@
 {% block title %}{{ page_title|title }}{% endblock %}
 
 {% block content %}
-  <form action="" method="post">{% csrf_token %}
-    <p>Are you sure you want to delete "{{ object }}"?</p>
-    <a href="{{ object.get_absolute_url }}"
-       class="btn btn-success">
-      Cancel
-    </a>
-    <input type="submit"
-           class="btn btn-danger"
-           value="Confirm" />
-  </form>
-  <br/>
+  <section class="section-register">
+    <div class="register__row">
+      <div class="register">
+        <div class="form__group">
+          <div class="form__input">
+            <form action="" method="post">{% csrf_token %}
+              <p class="">Are you sure you want to delete "{{ object }}"?</p>
+              <a href="{{ object.get_absolute_url }}"
+                 class="btn btn-success">
+                Cancel
+              </a>
+              <input type="submit"
+                     class="btn btn-danger"
+                     value="Confirm"/>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
 {% endblock %}

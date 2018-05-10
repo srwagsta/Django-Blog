@@ -27,7 +27,8 @@ class BlogHomeView(TemplateView):
         context['total_user_count'] = get_user_model().objects.count()
         # First users for the avatar pic and the first name field
         first_4_users = get_user_model().objects.all()[:4]
-        context['first_user'] = first_4_users[0]
+        if len(first_4_users) > 0:
+            context['first_user'] = first_4_users[0]
         context['user_profiles'] = first_4_users
         # 2 most recent posts to be pinned
         context['top_posts'] = Post.objects.all().order_by('-post_id')[:2]
@@ -134,17 +135,6 @@ class CommentDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Comment
     permission_required = 'comment.can_delete_comment'
     permission_denied_message = PERMISSION_DENIED_MESSAGE
-    success_url = reverse_lazy('blog:comment_list')
+    success_url = reverse_lazy('blog:post_list')
     template_name = GENERIC_DELETE_TEMPLATE_PATH
     failed_delete_template = GENERIC_FAILED_DELETE_TEMPLATE_PATH
-
-
-class CommentListView(ListView):
-    model = Comment
-    context_object_name = 'comment_list'
-    paginate_by = 5
-    queryset = Comment.objects.all()
-
-
-class CommentDetailView(DetailView):
-    model = Comment

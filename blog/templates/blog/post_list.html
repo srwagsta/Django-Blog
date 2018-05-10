@@ -23,7 +23,7 @@
           </figure>
           <div class="post__text">
             <h3 class="heading-tertiary u-margin-bottom-small">
-              <a href="{{ post.get_absolute_url }}">{{ post.post_title }}</a>
+              <a href="{{ post.get_absolute_url }}">{{ post.post_title }} ({{ post.comments.all.count }} Comments)</a>
             </h3>
             <p>
               {{ post.post_content }}
