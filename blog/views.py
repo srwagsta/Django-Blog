@@ -3,8 +3,7 @@ from django.views.generic import (ListView, TemplateView, DetailView,
 from django.urls import reverse_lazy
 from .models import Post, Comment
 from .forms import PostForm, CommentForm
-from django.contrib.auth.mixins import LoginRequiredMixin
-from rules.contrib.views import PermissionRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
 
@@ -37,11 +36,12 @@ class BlogHomeView(TemplateView):
 
 class PostCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = Post
-    permission_required = 'post.can_publish_post'
+    permission_required = 'blog.can_publish_post'
     permission_denied_message = PERMISSION_DENIED_MESSAGE
     success_msg = "Post Published!"
     form_class = PostForm
     template_name = GENERIC_CRISPY_FORM_PATH
+    raise_exception = True
 
     def get_context_data(self, **kwargs):
         context = super(PostCreate, self).get_context_data(**kwargs)
@@ -56,7 +56,7 @@ class PostCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
 
 class PostUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = Post
-    permission_required = 'post.can_edit_post'
+    permission_required = 'blog.can_edit_post'
     permission_denied_message = PERMISSION_DENIED_MESSAGE
     success_msg = "Post Updated!"
     form_class = PostForm
@@ -70,7 +70,7 @@ class PostUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
 
 class PostDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Post
-    permission_required = 'post.can_delete_post'
+    permission_required = 'blog.can_delete_post'
     permission_denied_message = PERMISSION_DENIED_MESSAGE
     success_url = reverse_lazy('blog:post_list')
     template_name = GENERIC_DELETE_TEMPLATE_PATH
@@ -91,7 +91,7 @@ class PostDetailView(DetailView):
 # Start Comment Views
 class CommentCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = Comment
-    permission_required = 'comment.can_create_comment'
+    permission_required = 'blog.can_create_comment'
     permission_denied_message = PERMISSION_DENIED_MESSAGE
     success_msg = "Comment Published!"
     form_class = CommentForm
@@ -119,7 +119,7 @@ class CommentCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
 
 class CommentUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = Comment
-    permission_required = 'comment.can_edit_comment'
+    permission_required = 'blog.can_edit_comment'
     permission_denied_message = PERMISSION_DENIED_MESSAGE
     success_msg = "Comment Updated!"
     form_class = CommentForm
@@ -133,7 +133,7 @@ class CommentUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
 
 class CommentDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Comment
-    permission_required = 'comment.can_delete_comment'
+    permission_required = 'blog.can_delete_comment'
     permission_denied_message = PERMISSION_DENIED_MESSAGE
     success_url = reverse_lazy('blog:post_list')
     template_name = GENERIC_DELETE_TEMPLATE_PATH
