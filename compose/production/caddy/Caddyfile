@@ -1,5 +1,5 @@
 www.{$DOMAIN_NAME} {
-    redir https://example.com
+    redir https://18.219.39.31
 }
 
 {$DOMAIN_NAME} {
