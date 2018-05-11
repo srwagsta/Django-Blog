@@ -337,7 +337,6 @@ pip-selfcheck.json
 
 
 
-crits_blog/media/
 
 # Added to maintain local compose files which are ignored by something above.
 # See issue https://github.com/pydanny/cookiecutter-django/issues/1321
