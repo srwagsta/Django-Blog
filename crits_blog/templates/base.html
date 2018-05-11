@@ -38,6 +38,17 @@
         </div>
       </div>
     {% endif %}
+
+  <form action="{% url 'blog:post_list' %}" class="search" method="GET">
+    {% csrf_token %}
+    <input type="text" class="search__input" name="name" placeholder="Search Posts By Name">
+    <button class="search__button">
+       <svg class="search__icon">
+            {#  TODO: come back and add the icons somehow?? #}
+            <use xlink:href="/img/sprite.svg#icon-magnifying-glass"></use>
+          </svg>
+    </button>
+  </form>
   </header>
   {#These are all the URL paths to compare for the active styling on the navbar#}
   {% url 'blog:home' as home_url %}
