@@ -2,6 +2,7 @@ Crits Blog
 ==========
 
 A simple blog for future integration to the crits and coffee website.
+Refer to the bottom section for local testing environment setup.
 
 .. image:: https://img.shields.io/badge/built%20with-Cookiecutter%20Django-ff69b4.svg
      :target: https://github.com/pydanny/cookiecutter-django/
@@ -75,8 +76,9 @@ You must set the DSN url in production.
 Deployment
 ----------
 
-Deployed via an Ubuntu based Docker container.
-
+Deployed via an Ubuntu based Docker container. A 'default' and 'editors' user groups must be created for proper deployment.
+The default users will have restrictive permissions and the editors will have all blog related permissions. This will change
+the view behaviors within the blog app unless the user is the author.
 
 
 Docker
@@ -87,4 +89,22 @@ See detailed `cookiecutter-django Docker documentation`_.
 .. _`cookiecutter-django Docker documentation`: http://cookiecutter-django.readthedocs.io/en/latest/deployment-with-docker.html
 
 
+Local Testing and Deployment
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Install Docker Daemon for `mac`_ or `windows`_.
+Start the Docker Daemon using the Docker application.
+Build the container using::
+    $ docker-compose -f local.yml build
+Start the container using::
+    $ docker-compose -f local.yml up
+At this point the application can be reached at 0.0.0.0:8000
+
+For local testing and development please build and run the included local.yml docker configuration file
+
+Any management commands run through the Docker instance::
+
+    $ docker-compose -f local.yml run --rm django python manage.py migrate
+
+.. _`mac`: https://docs.docker.com/docker-for-mac/install/
+.. _`windows`: https://docs.docker.com/docker-for-windows/install/
